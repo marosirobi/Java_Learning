@@ -2,7 +2,7 @@ public class CodingExercise {
 
     public static void main(String[] args) {
 
-        System.out.println();
+        System.out.println(581760%(60*24*365)/60/24 );
 
     }
 
@@ -44,5 +44,41 @@ public class CodingExercise {
 
     public static boolean isTeen(int num){
         return num <= 19 && num >= 13 ? true : false;
+    }
+
+    public static double area(double radius)
+    {
+        return radius < 0 ? -1 : radius * radius * 3.14159265359;
+    }
+
+    public static double area(double x, double y)
+    {
+        return x < 0 ? -1 : y < 0 ? -1 : x * y;
+    }
+
+    public static void printYearsAndDays(long minutes){
+        System.out.println(minutes < 0 ? "Invalid Value" : minutes + " min = " + minutes/(60*24*365) + " y and " + (minutes/(60*24*365) == 0 ? minutes/(60*24) : minutes%(60*24*365)/60/24)  + " d");
+    }
+
+    public static void printEqual(int num1,int num2,int num3){
+        if(num1 < 0 || num2 < 0 || num3 < 0){
+            System.out.println("Invalid Value");
+            return;
+        }else if(num1 == num2 && num1 == num3){
+            System.out.println("All numbers are equal");
+            return;
+        }else if(num1 != num2 && num1 != num3 && num2 != num3){
+            System.out.println("All numbers are different");
+            return;
+        }
+
+        System.out.println("Neither all are equal or different");
+    }
+
+    public static boolean isCatPlaying(boolean summer, int temperature){
+        if(summer){
+            return temperature < 25 ? false : temperature > 45 ? false : true;
+        }
+        return temperature < 25 ? false : temperature > 35 ? false : true;
     }
 }
