@@ -33,6 +33,10 @@ public class Main {
         System.out.println(getQuarter(month));
 
         //4.
+        //static and instance methods
+        //Integer.parseInt("123"); vs "hello".toUpperCase();
+
+        //5.
 
     }
 
