@@ -28,15 +28,16 @@ public class Main {
             }
             default -> System.out.println("value is not 1, 2, 3, 4 or 5");
         }
-        //3.
+        // 3.
         String month = "JANUARY";
         System.out.println(getQuarter(month));
 
-        //4.
+        // 4.
         //static and instance methods
         //Integer.parseInt("123"); vs "hello".toUpperCase();
 
-        //5.
+        // 5.
+
 
     }
 

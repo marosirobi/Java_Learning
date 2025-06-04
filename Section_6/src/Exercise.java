@@ -1,7 +1,11 @@
+import java.util.Scanner;
+
 public class Exercise {
     public static void main(String[] args) {
 
-        printSquareStar(5);
+        System.out.println(getBucketCount(2.75, 3.25, 2.5, 1));
+        System.out.println(getBucketCount(3.4, 2.1, 1.5));
+        System.out.println(getBucketCount(3.4, 1.5));
     }
 
     public static void printNumberInWord(int number){
@@ -306,5 +310,49 @@ public class Exercise {
             }
 
         }
+    }
+
+    public static void inputThenPrintSumAndAverage(){
+        Scanner sc = new Scanner(System.in);
+        int sum = 0;
+        long avg = 0;
+        int counter = 0;
+
+        while(true){
+            try{
+                int number = Integer.parseInt(sc.nextLine());
+                sum += number;
+                counter++;
+            }catch (NumberFormatException e){
+                break;
+            }
+        }
+        if(counter == 0){
+            System.out.println("SUM = 0 AVG = 0");
+            return;
+        }
+        avg = Math.round((double)sum/counter);
+        System.out.println("SUM = " + sum + " AVG = "+ avg);
+    }
+
+    public static int getBucketCount(double width, double height, double areaPerBucket, int extraBuckets){
+        if(width <= 0 || height <= 0 || areaPerBucket <= 0 || extraBuckets < 0)
+            return -1;
+        double neededBuckets = width * height / areaPerBucket - extraBuckets;
+        return  neededBuckets < 0 ? 0 : neededBuckets % (int)neededBuckets > 0 ? (int)neededBuckets + 1 : (int)Math.round(neededBuckets);
+    }
+
+    public static int getBucketCount(double width, double height, double areaPerBucket){
+        if(width <= 0 || height <= 0 || areaPerBucket <= 0)
+            return -1;
+        double neededBuckets = width * height / areaPerBucket;
+        return  neededBuckets < 0 ? 0 : neededBuckets % (int)neededBuckets > 0 ? (int)neededBuckets + 1 : (int)Math.round(neededBuckets);
+    }
+
+    public static int getBucketCount(double area, double areaPerBucket){
+        if(areaPerBucket <= 0 || area <= 0)
+            return -1;
+        double neededBuckets = area / areaPerBucket;
+        return  neededBuckets < 0 ? 0 : neededBuckets % (int)neededBuckets > 0 ? (int)neededBuckets + 1 : (int)Math.round(neededBuckets);
     }
 }
