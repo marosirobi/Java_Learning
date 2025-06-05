@@ -3,17 +3,16 @@ import java.util.Scanner;
 public class input {
 
     public static void main(String[] args) {
-        try{
+//        try{
+//
+//            System.out.println(getInputFromScanner(24));
+//        }catch (NullPointerException e){
+//
+//            System.out.println(getInputFromConsole(24));
+//        }
+//        System.out.println();
 
-            System.out.println(getInputFromScanner(24));
-        }catch (NullPointerException e){
-
-            System.out.println(getInputFromConsole(24));
-        }
-
-
-        System.out.println();
-
+        System.out.println(getInputFromConsole(24));
     }
     public static String getInputFromConsole(int currentYear){
 
