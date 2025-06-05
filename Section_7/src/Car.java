@@ -6,8 +6,36 @@ public class Car {
     private int doors;
     private boolean convertible;
 
+    public Car(){
+        this("Default_make","Default_model","Default_color",3,false);
+        System.out.println("Empty constructor called");
+    }
+    public Car(String make, String model, String color, int doors, boolean convertible){
+        System.out.println("Car constructor with parameters called");
+        this.make = make;
+        this.model = model;
+        this.convertible = convertible;
+        this.color = color;
+        this.doors = doors;
+    }
+
+    public Car(String make, String model) {
+        this(make,model,"black", 3, true);
+    }
+
     public void describeCar(){
-        System.out.println(doors +"-Door " + color + " " + make + " " + model + " " + (convertible ? "Convertible" : ""));
+        System.out.println(toString());
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                ", doors=" + doors +
+                ", convertible=" + convertible +
+                '}';
     }
 
     public String getMake(){
