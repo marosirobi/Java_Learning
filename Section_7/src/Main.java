@@ -49,7 +49,6 @@ public class Main {
 //        System.out.println(pojoStudent.getName() + " is taking " + pojoStudent.getClassList());
 //        System.out.println(recordStudent.name() + " is taking " + recordStudent.classList());
 
-
         Animal animal = new Animal("big", "Pig", 80);
         doAnimalStuff(animal, "slow");
         Dog dog = new Dog();
@@ -66,6 +65,57 @@ public class Main {
 
         Fish goldie = new Fish("Goldfish" ,1,3,2);
         doAnimalStuff(goldie,"fast");
+
+        String bulletIt = "Print a Bulleted List:\n" + "\t\u2022 First Point\n" + "\t\u2022 Sub Point";
+        System.out.println(bulletIt);
+        String textBlock = """
+                Print Bulleted List:
+                    \u2022 First Point
+                    \u2022 Sub Point""";
+        System.out.println(textBlock);
+
+        int age =35;
+        System.out.printf("Your age is %d%n",age);
+        System.out.printf("Your age is %.2f%n",(float)age);
+
+        for (int i = 1; i <= 100000; i *= 10) {
+            System.out.printf("%6d %n",i);
+        }
+
+        String formattedString = String.format("Your age is %d",age);
+        System.out.println(formattedString);
+
+        formattedString = "Your age is at %d".formatted(age);
+        System.out.println(formattedString);
+
+        System.out.printf("index of age = %d %n",formattedString.indexOf('a'));
+        System.out.printf("index of age = %d %n",formattedString.lastIndexOf('a'));
+
+        System.out.printf("index of age = %d %n",formattedString.indexOf('a',4));
+        System.out.printf("index of age = %d %n",formattedString.lastIndexOf('a',8));
+
+        String helloWorld = "Hello World";
+        String hwLower = helloWorld.toLowerCase();
+
+        if(helloWorld.equals(hwLower)){
+            System.out.println("Values match");
+        }
+        if(helloWorld.equalsIgnoreCase(hwLower)) {
+            System.out.println("Values match ignoring case");
+        }
+
+        if(helloWorld.startsWith("Hello")){
+            System.out.println("String starts with Hello");
+        }
+        if(helloWorld.endsWith("World")){
+            System.out.println("String ends with World");
+        }
+        if(helloWorld.contains("World")){
+            System.out.println("String contains World");
+        }
+        if(helloWorld.contentEquals("Hello World")){
+            System.out.println("Values match");
+        }
     }
     public static void doAnimalStuff(Animal animal, String speed){
         animal.move(speed);
