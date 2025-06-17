@@ -11,6 +11,7 @@ public class MoreLists {
         String[] items = {"apples", "bananas", "milk", "egg"};
 
         List<String> list = List.of(items);
+
         System.out.println(list);
 
         System.out.println(list.getClass().getName());
@@ -41,6 +42,7 @@ public class MoreLists {
         System.out.println(groceries);
         groceries.removeAll(List.of("apples", "eggs"));
         System.out.println(groceries);
+
 
         groceries.retainAll(List.of("mustard", "milk", "apples"));
         System.out.println(groceries);
