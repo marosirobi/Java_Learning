@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Chall2 {
     public static Scanner sc = new Scanner(System.in);
-    public static boolean forward = true;
 
     public static void main(String[] args) {
         Town sydney = new Town("Sydney",0);
@@ -12,17 +11,18 @@ public class Chall2 {
         places.addFirst(new Town("Sydney",0));
         boolean flag = true;
         var iterator = places.listIterator(0);
+        boolean forward = true;
 
         while (flag){
-            finalOrOriginating(iterator,forward);
+            forward = finalOrOriginating(iterator,forward);
 
             printActions();
             System.out.print("Enter Value: ");
             String action = sc.nextLine().toUpperCase().substring(0,1);
 
             switch (action){
-                case "F" -> iterateForward(iterator);
-                case "B" -> iterateBackward(iterator);
+                case "F" -> forward = iterateForward(iterator,forward);
+                case "B" -> forward = iterateBackward(iterator,forward);
                 case "L" -> printTowns(places);
                 case "M" -> printActions();
                 case "Q" -> flag = false;
@@ -33,15 +33,18 @@ public class Chall2 {
 
     }
 
-    private static void finalOrOriginating(ListIterator<Town> iterator, boolean forward){
+    private static boolean finalOrOriginating(ListIterator<Town> iterator, boolean forward){
         if(!iterator.hasPrevious()){
             forward = true;
             System.out.println("Originating : " + iterator.next());
+            return forward;
         }
         if(!iterator.hasNext()){
             forward = false;
             System.out.println("Final : " + iterator.previous());
+            return forward;
         }
+        return forward;
     }
 
     private static void printTowns(LinkedList<Town> list){
@@ -62,26 +65,30 @@ public class Chall2 {
                 (Q)uit""");
     }
 
-    private static void iterateForward(ListIterator<Town> iterator){
+    private static boolean iterateForward(ListIterator<Town> iterator,boolean forward){
         if(!forward){
             forward = true;
             if(iterator.hasNext())
                 iterator.next();
+            return forward;
         }
         if(iterator.hasNext()){
             System.out.println(iterator.next());
         }
+        return forward;
     }
 
-    private static void iterateBackward(ListIterator<Town> iterator){
+    private static boolean iterateBackward(ListIterator<Town> iterator,boolean forward){
         if(forward){
             forward = false;
             if(iterator.hasPrevious())
                 iterator.previous();
+            return forward;
         }
         if(iterator.hasPrevious()){
             System.out.println(iterator.previous());
         }
+        return forward;
     }
 
 
