@@ -1,34 +1,47 @@
 package model.challenge2;
 
-import org.w3c.dom.ls.LSOutput;
-
-import javax.swing.*;
 import java.util.*;
 
 public class Chall2 {
     public static Scanner sc = new Scanner(System.in);
+    public static boolean forward = true;
 
     public static void main(String[] args) {
         Town sydney = new Town("Sydney",0);
-        LinkedList<Town> places = new LinkedList<>(List.of(new Town("Budapset",43),new Town("Vienna",55)));
+        LinkedList<Town> places = new LinkedList<>(List.of(new Town("Budapset",43),new Town("Vienna",55),new Town("Justin",125),new Town("Piece",225),new Town("Cheese",22)));
         places.addFirst(new Town("Sydney",0));
         boolean flag = true;
-        ListIterator<Town> iterator = places.listIterator(0);
+        var iterator = places.listIterator(0);
+
         while (flag){
+            finalOrOriginating(iterator,forward);
+
             printActions();
-            String action = sc.nextLine();
+            System.out.print("Enter Value: ");
+            String action = sc.nextLine().toUpperCase().substring(0,1);
 
             switch (action){
                 case "F" -> iterateForward(iterator);
                 case "B" -> iterateBackward(iterator);
-                case "L" -> listPlaces(places,iterator);
-                case "M" -> printTowns(places);
+                case "L" -> printTowns(places);
+                case "M" -> printActions();
                 case "Q" -> flag = false;
                 default -> System.out.println("Wrong input");
             }
 
         }
 
+    }
+
+    private static void finalOrOriginating(ListIterator<Town> iterator, boolean forward){
+        if(!iterator.hasPrevious()){
+            forward = true;
+            System.out.println("Originating : " + iterator.next());
+        }
+        if(!iterator.hasNext()){
+            forward = false;
+            System.out.println("Final : " + iterator.previous());
+        }
     }
 
     private static void printTowns(LinkedList<Town> list){
@@ -39,31 +52,38 @@ public class Chall2 {
     }
 
     private static void printActions(){
-        String textBox = """
+
+        System.out.println("""
                 Available actions (select word or letter):
                 (F)orward
                 (B)ackward
                 (L)ist Places
                 (M)enu
-                (Q)uit""";
-        System.out.println(textBox);
+                (Q)uit""");
     }
+
     private static void iterateForward(ListIterator<Town> iterator){
-        if(iterator.hasNext() ){
-            Town t = iterator.next();
-            System.out.println(t.getTown() + " --> " + t.getDistance() + " km");
-            return;
+        if(!forward){
+            forward = true;
+            if(iterator.hasNext())
+                iterator.next();
         }
-        System.out.println("This is the end of the list.");
+        if(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
     }
+
     private static void iterateBackward(ListIterator<Town> iterator){
-        if(iterator.hasPrevious()){
-            Town t = iterator.previous();
-            System.out.println(t.getTown() + " --> " + t.getDistance() + " km");
-            return;
+        if(forward){
+            forward = false;
+            if(iterator.hasPrevious())
+                iterator.previous();
         }
-        System.out.println("This is the start of the list.");
+        if(iterator.hasPrevious()){
+            System.out.println(iterator.previous());
+        }
     }
+
 
     private static void listPlaces(LinkedList<Town> list, ListIterator<Town> iterator){
         System.out.println("input a city and the distance from Sydney(with comma)");
@@ -79,7 +99,6 @@ public class Chall2 {
         for (var t : list){
             if(place.getDistance() < t.getDistance()){
                 list.add(index,place);
-
                 return;
             }
             index++;
