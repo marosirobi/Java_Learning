@@ -20,6 +20,14 @@ public class Bank {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "name='" + name + '\'' +
+                ", customers=" + customers +
+                '}';
+    }
+
     public void addCustomer(String name, double deposit){
         if(getCustomer(name) == null){
             Customer customer = new Customer(name, deposit);
@@ -29,12 +37,25 @@ public class Bank {
         }
         System.out.println("This customer already exists.");
     }
+    public void addTransaction(String name, double deposit){
+        Customer customer = getCustomer(name);
+        if(customer != null){
+            customer.transactions().add(deposit);
+        }
+    }
 
-    public void printStatement(Customer c){
-        System.out.println(c.name() + "'s transactions: ");
 
-        for (double credit : c.transactions()){
-            System.out.println(credit);
+
+    public void printStatement(String name){
+        Customer customer = getCustomer(name);
+        if(customer == null){
+            return;
+        }
+        System.out.println("-".repeat(30));
+        System.out.println(customer.name() + "'s transactions: ");
+
+        for (double credit : customer.transactions()){
+            System.out.printf("$%10.2f (%s)%n", credit, credit < 0 ? "debit" : "credit");
         }
     }
 }
