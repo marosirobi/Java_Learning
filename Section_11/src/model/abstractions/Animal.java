@@ -11,6 +11,10 @@ public abstract class Animal {
         this.weight = weight;
     }
 
+    public final String getExplicitType(){
+        return  getClass().getSimpleName() + " (" + type + ")";
+    }
+
     public abstract void move(String speed);
     public abstract  void makeNoise();
 }
