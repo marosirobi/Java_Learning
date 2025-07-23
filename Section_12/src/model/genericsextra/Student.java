@@ -1,9 +1,12 @@
 package model.genericsextra;
 
+import model.util.QueryItem;
+
 import java.util.Random;
 
-public class Student {
-
+public class Student implements QueryItem, Comparable<Student> {
+    private static int LAST_ID = 10_000;
+    private int id;
     private String name;
     private String course;
     private int yearStarted;
@@ -19,14 +22,33 @@ public class Student {
         name = firstNames[random.nextInt(5)] + " " + (char) lastNameIndex;
         course = courses[random.nextInt(3)];
         yearStarted = random.nextInt(2018,2025);
+        id = LAST_ID++;
     }
 
     @Override
     public String toString() {
-        return "%-15s %-15s %d".formatted(name,course,yearStarted);
+        return "%d %-15s %-15s %d".formatted(id,name,course,yearStarted);
     }
 
     public int getYearStarted() {
         return yearStarted;
+    }
+
+
+    @Override
+    public boolean matchFieldValue(String fieldName, String value) {
+        String fName = fieldName.toUpperCase();
+        return switch (fName){
+            case "NAME" -> name.equalsIgnoreCase(value);
+            case "COURSE" -> course.equalsIgnoreCase(value);
+            case "YEARSTARTED" -> yearStarted == (Integer.parseInt(value));
+            default -> false;
+        };
+    }
+
+
+    @Override
+    public int compareTo(Student o) {
+        return Integer.valueOf(id).compareTo(o.id);
     }
 }
