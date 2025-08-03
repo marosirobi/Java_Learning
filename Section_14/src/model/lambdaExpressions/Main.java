@@ -3,9 +3,11 @@ package model.lambdaExpressions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
 
 
 public class Main {
@@ -69,6 +71,33 @@ public class Main {
         list.removeIf(s -> s.startsWith("ea"));
         list.forEach(s -> System.out.println(s));
 
+        list.replaceAll(s -> s.charAt(0) + " - " + s.toUpperCase());
+        System.out.println("-".repeat(10));
+        list.forEach(s -> System.out.println(s));
+
+        String[] emptyStrings = new String[10];
+        System.out.println(Arrays.toString(emptyStrings));
+        Arrays.fill(emptyStrings, "");
+        System.out.println(Arrays.toString(emptyStrings));
+        Arrays.setAll(emptyStrings, (i) -> "" + (i+1) + ". ");
+        System.out.println(Arrays.toString(emptyStrings));
+
+        Arrays.setAll(emptyStrings, (i) -> "" + switch (i){
+                    case 0 -> "one";
+                    case 1 -> "two";
+                    case 2 -> "three";
+                    default -> i;
+                } + ". "
+
+        );
+        System.out.println(Arrays.toString(emptyStrings));
+
+
+        String[] names = {"Ann", "Bob", "David", "Ed", "Fred"};
+        String[] randomList = randomlySelectedValues(15, names,
+                () -> new Random().nextInt(0,names.length));
+
+        System.out.println(Arrays.toString(randomList));
     }
 
     public static <T> T calculator(BinaryOperator<T> function, T value1, T value2){
@@ -86,5 +115,15 @@ public class Main {
         boolean result = predicate.test(t1,t2);
         System.out.println(result);
         return result;
+    }
+
+    public static String[] randomlySelectedValues(int count,
+                                                  String[] values,
+                                                  Supplier<Integer> s){
+        String[] selectedValues = new String[count];
+        for (int i = 0; i < count; i++) {
+            selectedValues[i] = values[s.get()];
+        }
+        return selectedValues;
     }
 }

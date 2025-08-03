@@ -18,7 +18,6 @@ public class Main {
                 new Person("Linus", "Van Pelt"),
                 new Main.Person("Charlie","Brown")
         ));
-
         //anonymous class
         var comparatorLastName = new Comparator<Person>(){
             @Override
