@@ -1,8 +1,6 @@
 package model.chall1;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.sql.Array;
+import java.util.*;
 
 
 public class DeckMain {
@@ -37,5 +35,86 @@ public class DeckMain {
 
         cards = List.copyOf(kingsOfClubs);
         Card.printDeck(cards, "List Copy of Kings",1);
+
+        List<Card> deckShuffle = Card.getStandardDeck();
+        Collections.shuffle(deckShuffle);
+        Card.printDeck(deckShuffle);
+
+        Collections.reverse(deckShuffle);
+        Card.printDeck(deckShuffle);
+
+        var sortingAlgoritm = Comparator.comparing(Card::rank)
+                        .thenComparing(Card::suit);
+        Collections.sort(deckShuffle,sortingAlgoritm);
+        Card.printDeck(deckShuffle,"Standard deck",13);
+        Collections.reverse(deckShuffle);
+        Card.printDeck(deckShuffle,"Standard deck",13);
+
+        List<Card> kings = new ArrayList<>(deckShuffle.subList(4,8));
+        Card.printDeck(kings);
+        List<Card> tens = new ArrayList<>(deckShuffle.subList(16,20));
+        Card.printDeck(tens);
+
+        int subListIndex = Collections.indexOfSubList(deckShuffle, tens);
+        System.out.println("Sublist index for tens = " + subListIndex);
+        System.out.println("contains = " + deckShuffle.containsAll(tens));
+
+        boolean disjoint = Collections.disjoint(deckShuffle,tens);
+        System.out.println("disjoint = " + disjoint);
+
+        boolean disjoint2 = Collections.disjoint(kings,tens);
+        System.out.println("disjoint = " + disjoint2);
+
+        Card tenOfHearts = Card.getNumericCard(Suit.HEART,10);
+        deckShuffle.sort(sortingAlgoritm);
+        int foundIndex = Collections.binarySearch(deckShuffle, tenOfHearts, sortingAlgoritm);
+        System.out.println("foundIndex = " + foundIndex);
+        System.out.println("foundIndex = " + deck.indexOf(tenOfHearts));
+        System.out.println(deckShuffle.get(foundIndex));
+
+        Card tenOfClubs = Card.getNumericCard(Suit.CLUB, 10);
+        Collections.replaceAll(deckShuffle,tenOfHearts,tenOfClubs);
+        Card.printDeck(deckShuffle.subList(32,36),"Replaced",1);
+
+        Collections.replaceAll(deckShuffle,tenOfClubs,tenOfHearts);
+        Card.printDeck(deckShuffle.subList(32,36),"Replaced",1);
+
+        if(Collections.replaceAll(deckShuffle,tenOfHearts,tenOfClubs)){
+            System.out.println("Tens of hearts are replaced with tens of clubs");
+        }else{
+            System.out.println("no tens of hearts found in the list");
+        }
+
+        System.out.println("ten of clubs cards = " +
+                Collections.frequency(deckShuffle,tenOfClubs));
+
+        System.out.println("Best Card = " + Collections.max(deckShuffle, sortingAlgoritm));
+        System.out.println("Worst Card = " + Collections.min(deckShuffle, sortingAlgoritm));
+
+        var sortBySuit = Comparator.comparing(Card::suit)
+                .thenComparing(Card::rank);
+
+        deck.sort(sortBySuit);
+        Card.printDeck(deck,"Sorted by suit", 4);
+
+        List<Card> copied = new ArrayList<>(deck.subList(0,13));
+        Collections.rotate(copied,2);
+        System.out.println("Unrotated: " + deck.subList(0,13));
+        System.out.println("rotated 2: " + copied);
+
+        copied = new ArrayList<>(deck.subList(0,13));
+        Collections.rotate(copied,-2);
+        System.out.println("Unrotated: " + deck.subList(0,13));
+        System.out.println("rotated -2: " + copied);
+
+        copied = new ArrayList<>(deck.subList(0,13));
+        for(int i = 0; i < copied.size()/2; i++){
+            Collections.swap(copied, i, copied.size()-1-i);
+        }
+        System.out.println("Manual reverse: " + copied);
+
+        copied = new ArrayList<>(deck.subList(0,13));
+        Collections.reverse(copied);
+        System.out.println("Using reverse method: " + copied);
     }
 }
