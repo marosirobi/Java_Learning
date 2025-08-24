@@ -3,6 +3,7 @@ package model.chall1.Poker;
 import model.chall1.Card;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class PokerGame {
 
@@ -28,7 +29,16 @@ public class PokerGame {
         Card.printDeck(deck);
         deal();
         System.out.println("-------------------");
-        pokerHands.forEach(System.out::println);
+        Consumer<PokerHand> checkHand = PokerHand::evalHand;
+        pokerHands.forEach(checkHand.andThen(System.out::println));
+
+        int cardsDealt = playerCount * cardsInHands;
+        int cardsRemaining = deck.size() - cardsDealt;
+
+        remainingCards = new ArrayList<>(Collections.nCopies(cardsRemaining, null));
+        remainingCards.replaceAll( c -> deck.get(cardsDealt + remainingCards.indexOf(c)));
+        Card.printDeck(remainingCards, "Remaining cards", 2);
+
     }
 
     private void deal(){
