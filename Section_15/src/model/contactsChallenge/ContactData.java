@@ -30,6 +30,7 @@ public class ContactData {
 
     public static List<Contact> getData(String type){
         List<Contact> dataList = new ArrayList<>();
+
         Scanner sc = new Scanner(type.equals("phone") ? phoneData : emailData);
         while(sc.hasNext()){
             String[] data = sc.nextLine().split(",");
