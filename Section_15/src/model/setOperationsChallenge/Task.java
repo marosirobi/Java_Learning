@@ -56,7 +56,7 @@ public class Task implements Comparable<Task>{
 
     @Override
     public String toString() {
-        return "%-20s %-25s %-10s %-5s".formatted(projectName,desc,String.valueOf(priority),String.valueOf(currentStatus));
+        return "%-20s %-25s %-10s %-17s %-5s".formatted(projectName,desc,String.valueOf(priority),String.valueOf(currentStatus),assignee);
     }
 
     @Override
