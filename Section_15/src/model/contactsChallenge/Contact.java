@@ -21,12 +21,9 @@ public class Contact {
     }
     public Contact(String name, String email, long phone) {
         this.name = name;
-        if(emails != null)
+        if(email != null)
             emails.add(email);
-        else{
-            emails = new HashSet<>();
-            emails.add(email);
-        }
+
         if(phone > 0){
 //            StringBuilder phoneNumber = new StringBuilder(String.valueOf(phone));
 //            phoneNumber.insert(0,"(");
