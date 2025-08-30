@@ -6,8 +6,8 @@ public class GameControl {
 
     private Location startLocation;
 
-    public GameControl() {
-        this.startLocation = new Location("road");
+    public GameControl(String startingPlace) {
+        this.startLocation = new Location(startingPlace);
     }
 
     public void startGame(){

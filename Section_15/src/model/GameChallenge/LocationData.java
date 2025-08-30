@@ -2,11 +2,10 @@ package model.GameChallenge;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class LocationData {
 
-    private static final String data = """
+    private static String data = """
             road,at the end of the road, W: hill, E:well house,S:valley,N:forest
             hill,on top of hill with a view in all directions,N:forest, E:road
             well house,inside a well house for a small spring,W:road,N:lake,S:stream
@@ -16,11 +15,16 @@ public class LocationData {
             stream,near a stream with a rocky bed,W:valley, N:well house
             """;
 
+    public static void addPlaces(String places){
+        data += places;
+    }
+
     public static Map<String, String> getNextLocations(String name){
 
         Map<String, String> locations = new HashMap<>();
 
         for(String s : data.split("\n")){
+
             String[] array = s.split(",");
             if (array[0].contains(name) && array.length > 2) {
                 for(int i = 2; i < array.length; i++){
