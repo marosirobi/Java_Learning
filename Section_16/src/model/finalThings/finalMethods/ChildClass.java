@@ -1,6 +1,6 @@
-package model.finalMethods;
+package model.finalThings.finalMethods;
 
-import model.generic.BaseClass;
+import model.finalThings.generic.BaseClass;
 
 public class ChildClass extends BaseClass {
 

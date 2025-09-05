@@ -1,4 +1,4 @@
-package model.generic;
+package model.finalThings.generic;
 
 public class BaseClass {
 

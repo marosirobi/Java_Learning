@@ -1,6 +1,7 @@
-package model.generic;
+package model.finalThings.generic;
 
-import model.finalMethods.ChildClass;
+import model.finalThings.finalMethods.ChildClass;
+import model.finalThings.util.Logger;
 
 public class FinalMain {
 
@@ -32,6 +33,12 @@ public class FinalMain {
         doXYZ(xArgument,16,zArgument);
         System.out.println("After method, xArgument: " + xArgument);
         System.out.println("After method, zArgument: " + zArgument);
+
+        StringBuilder tracker = new StringBuilder("Step 1 is abc");
+        Logger.logToConsole(tracker.toString());
+        tracker.append(", Step 2 is xyz");
+        Logger.logToConsole(tracker.toString());
+        System.out.println("After logging, tracker = " + tracker);
     }
 
     private static void doXYZ(String x, int y, final StringBuilder z){
