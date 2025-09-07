@@ -12,8 +12,8 @@ public class BankCustomer {
     private final int id;
     private final List<BankAccount> accounts = new ArrayList<>();
 
-
-    public BankCustomer(String name, double checkingAmount, double savingsAmount) {
+    //package private
+    BankCustomer(String name, double checkingAmount, double savingsAmount) {
         this.name = name;
         accounts.add(new BankAccount(BankAccount.Type.CHECKING,checkingAmount));
         accounts.add(new BankAccount(BankAccount.Type.SAVINGS,savingsAmount));
@@ -26,6 +26,18 @@ public class BankCustomer {
 
     public List<BankAccount> getAccounts() {
         return new ArrayList<>(accounts);
+    }
+
+    public String getCustomerId() {
+        return "%015d".formatted(id);
+    }
+
+    public BankAccount getAccount(BankAccount.Type type){
+        for(BankAccount b : accounts){
+            if(b.getAccountType() == type)
+                return b;
+        }
+        return null;
     }
 
     @Override
