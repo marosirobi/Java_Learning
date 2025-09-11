@@ -59,11 +59,15 @@ public class Pirate implements Player {
 
     boolean useWeapon(){
         System.out.println("current weapon : " + currentWeapon);
-        return false;
+        return visitNextTown();
     }
 
     boolean visitTown(){
-        String town = "My town, somewhere";
+        List<String> levelTowns = PirateGame.getTowns(value("level"));
+        if(levelTowns == null){
+            return false;
+        }
+        String town = levelTowns.get(value("townIndex"));
         if(town != null){
             townsVisited.add(town);
             return false;
@@ -79,5 +83,23 @@ public class Pirate implements Player {
         return "---> " + current +
                 "\nPirate " + name + " " + gameData +
                 "\n\ttownsVisited = " + Arrays.toString(simpleNames);
+    }
+
+    private boolean visitNextTown(){
+        int townIndex = value("townIndex");
+        var towns = PirateGame.getTowns(value("level"));
+
+        if(towns == null) return true;
+        if(townIndex >= (towns.size()-1)){
+            System.out.println("Leveling up! Bonus: 500 points!");
+            adjustValue("score",500);
+            adjustValue("level", 1);
+            adjustValue("townIndex",0);
+        }else{
+            System.out.println("Sailing to the next town! Bonus: 50 points!");
+            adjustValue("score", 50);
+            adjustValue("townIndex", 1);
+        }
+        return visitTown();
     }
 }

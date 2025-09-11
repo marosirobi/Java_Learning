@@ -1,6 +1,7 @@
 package model.GameChallenge;
 
 import model.GameChallenge.pirate.Pirate;
+import model.GameChallenge.pirate.PirateGame;
 import model.GameChallenge.pirate.Weapon;
 import model.GameChallenge.shooter.ShooterGame;
 
@@ -17,6 +18,10 @@ public class GameMain {
 
         Pirate tim = new Pirate("Tim");
         System.out.println(tim);
+
+        var console = new GameConsole<>(new PirateGame("The Pirate Game"));
+        int playerIndex = console.addPlayer();
+        console.playGame(playerIndex);
     }
 
 
