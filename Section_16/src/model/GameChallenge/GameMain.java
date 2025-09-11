@@ -3,7 +3,6 @@ package model.GameChallenge;
 import model.GameChallenge.pirate.Pirate;
 import model.GameChallenge.pirate.PirateGame;
 import model.GameChallenge.pirate.Weapon;
-import model.GameChallenge.shooter.ShooterGame;
 
 public class GameMain {
 

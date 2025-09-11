@@ -1,7 +1,6 @@
 package model.GameChallenge;
 
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class GameConsole<T extends Game<? extends Player>> {
 

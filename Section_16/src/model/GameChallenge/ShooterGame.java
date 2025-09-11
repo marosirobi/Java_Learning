@@ -1,12 +1,9 @@
-package model.GameChallenge.shooter;
-
-import model.GameChallenge.Game;
-import model.GameChallenge.GameAction;
+package model.GameChallenge;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ShooterGame extends Game<Shooter> {
+public final class ShooterGame extends Game<Shooter> {
     public ShooterGame(String gameName) {
         super(gameName);
     }

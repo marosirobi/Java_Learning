@@ -1,6 +1,4 @@
-package model.GameChallenge.shooter;
-
-import model.GameChallenge.Player;
+package model.GameChallenge;
 
 public record Shooter(String name) implements Player {
 
