@@ -10,7 +10,7 @@ public record Town(String name, String island, int level,
         loot = Loot.getRandomSetLoot();
         features = Feature.getRandomSetFeature();
 
-        opponents = getOpponents(new Random().nextInt(2));
+//        opponents = getOpponents(new Random().nextInt(2));
     }
 
     public Town(String name, String island, int level) {
