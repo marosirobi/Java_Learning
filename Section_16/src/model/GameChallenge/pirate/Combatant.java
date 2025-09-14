@@ -31,7 +31,7 @@ public sealed abstract class Combatant implements Player permits Islander, Pirat
 
     @Override
     public String name() {
-        return "";
+        return name;
     }
 
     public Weapon getCurrentWeapon(){
@@ -58,6 +58,7 @@ public sealed abstract class Combatant implements Player permits Islander, Pirat
         int health = value("health");
         health += adj;
         health = (health < 0) ? 0 : ((health > 100) ? 100 : health);
+        setValue("health",health);
     }
 
     boolean useWeapon(Combatant opponent){
@@ -66,12 +67,12 @@ public sealed abstract class Combatant implements Player permits Islander, Pirat
             System.out.println("***HIT");
             opponent.adjustHealth(-currentWeapon.getHitPoints());
             System.out.printf("%s's health =%d %s's health =%d%n",name,value("health"),
-                    opponent.name(),opponent.value("health"));
+                    opponent.name,opponent.value("health"));
             adjustValue("score", 50);
         }else{
             System.out.println("***MISS");
         }
-        return opponent.value("health") < 0;
+        return opponent.value("health") <= 0;
     }
 
     @Override

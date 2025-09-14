@@ -1,12 +1,10 @@
 package model.GameChallenge.pirate;
 
-import model.GameChallenge.Player;
-
 import java.util.*;
 
 public final class Pirate extends Combatant {
 
-    private final List<String> townsVisited = new LinkedList<>();
+    private final List<Town> townsVisited = new LinkedList<Town>();
     private List<Loot> loot;
     private List<Feature> features;
     private List<Combatant> opponents;
@@ -17,27 +15,42 @@ public final class Pirate extends Combatant {
     }
 
     boolean useWeapon(){
-        System.out.println("current weapon : " + super.getCurrentWeapon());
-        return visitNextTown();
+        int count = opponents.size();
+        if(count > 0){
+            int opponentIndex = count-1;
+            if(count > 1){
+                opponentIndex = new Random().nextInt(count);
+            }
+            Combatant combatant = opponents.get(opponentIndex);
+            if(super.useWeapon(combatant)){
+                opponents.remove(opponentIndex);
+            }else{
+                return combatant.useWeapon(this);
+            }
+        }
+        return false;
     }
 
     boolean visitTown(){
-        List<String> levelTowns = PirateGame.getTowns(value("level"));
+        List<Town> levelTowns = PirateGame.getTowns(value("level"));
         if(levelTowns == null){
             return false;
         }
-        String town = levelTowns.get(value("townIndex"));
+        Town town = levelTowns.get(value("townIndex"));
         if(town != null){
             townsVisited.add(town);
+            loot =town.loot();
+            features = town.features();
+            opponents = town.opponents();
             return false;
         }
         return true;
     }
 
     public String information() {
-        var current = ((LinkedList<String>) townsVisited).getLast();
+        var current = ((LinkedList<Town>) townsVisited).getLast();
         String[] simpleNames = new String[townsVisited.size()];
-        Arrays.setAll(simpleNames, i -> townsVisited.get(i).split(",")[0]);
+        Arrays.setAll(simpleNames, i -> townsVisited.get(i).name());
         return "---> " + current +
                 "\nPirate " + super.information() +
                 "\n\ttownsVisited = " + Arrays.toString(simpleNames);
@@ -45,7 +58,7 @@ public final class Pirate extends Combatant {
 
     private boolean visitNextTown(){
         int townIndex = value("townIndex");
-        var towns = PirateGame.getTowns(value("level"));
+        List<Town> towns = PirateGame.getTowns(value("level"));
 
         if(towns == null) return true;
         if(townIndex >= (towns.size()-1)){
@@ -59,5 +72,36 @@ public final class Pirate extends Combatant {
             adjustValue("townIndex", 1);
         }
         return visitTown();
+    }
+
+    boolean hasExperiences(){
+        return (features != null && features.size() > 0);
+    }
+
+    boolean hasOpponents(){
+        return (opponents != null && opponents.size() > 0);
+    }
+
+    boolean findLoot(){
+        if(loot.size()>0){
+            Loot item = loot.remove(0);
+            System.out.println("Found " + item + "!");
+            adjustValue("score", item.getValue());
+            System.out.println(name() + "'s score is now " + value("score"));
+        }
+        if(loot.size() == 0){
+            return visitNextTown();
+        }
+        return false;
+    }
+
+    boolean experienceFeature(){
+        if(features.size() > 0){
+            Feature item = features.remove(0);
+            System.out.println("Ran into " + item + "!");
+            adjustHealth(item.getAdjValue());
+            System.out.println(name() + "'s health is now " + value("health"));
+        }
+        return (value("health") <= 0);
     }
 }
