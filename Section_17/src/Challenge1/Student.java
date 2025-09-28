@@ -45,6 +45,10 @@ public class Student {
         return studentId;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
     public int getYearEnrolled() {
         return yearEnrolled;
     }
