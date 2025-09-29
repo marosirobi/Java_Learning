@@ -115,7 +115,7 @@ public class Student {
                 rand.nextBoolean(),
                 courses);
         for(Course c : courses){
-            int lecture = rand.nextInt(1, c.lectureCount());
+            int lecture = rand.nextInt(30, c.lectureCount());
             int year = rand.nextInt(student.yearEnrolled, maxYear);
             int month = rand.nextInt(1,13);
             if(year == (maxYear-1)){
