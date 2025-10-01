@@ -1,6 +1,7 @@
 package Challenge1;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -107,13 +108,15 @@ public class Student {
     }
 
     public static Student getRandomStudent(Course... courses){
+        int randLength = new Random().nextInt(1,courses.length);
+        Course[] randomCourses = Arrays.copyOf(courses, randLength);
         int maxYear = LocalDate.now().getYear() + 1;
         Student student = new Student(
                 getRandomVal("AU","CA","CN","GB","IN","UA","US"),
                 rand.nextInt(2015,maxYear), rand.nextInt(18,90),
                 getRandomVal("M","F","U"),
                 rand.nextBoolean(),
-                courses);
+                randomCourses);
         for(Course c : courses){
             int lecture = rand.nextInt(30, c.lectureCount());
             int year = rand.nextInt(student.yearEnrolled, maxYear);
