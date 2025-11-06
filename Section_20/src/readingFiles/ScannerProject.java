@@ -16,8 +16,8 @@ public class ScannerProject {
 //            }
 
 //            System.out.println(scanner.delimiter());
-//            scanner.useDelimiter("$");
-//            scanner.tokens().forEach(System.out::println);
+            scanner.useDelimiter("$");
+            scanner.tokens().forEach(System.out::println);
 
 //            scanner.findAll("[A-Za-z]{10,}")
 //                    .map(MatchResult::group)
