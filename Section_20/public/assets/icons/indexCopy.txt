@@ -1,0 +1,5 @@
+Directory Contents: 
+H:\Java_Learning\Section_20\public\assets\icons
+H:\Java_Learning\Section_20\public\assets\icons\index.txt
+H:\Java_Learning\Section_20\public\assets\icons\indexCopy.txt
+Generated: 2025-11-11T18:07:50.874437600

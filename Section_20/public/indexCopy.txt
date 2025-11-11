@@ -1,0 +1,11 @@
+Directory Contents: 
+H:\Java_Learning\Section_20\public
+H:\Java_Learning\Section_20\public\assets
+H:\Java_Learning\Section_20\public\assets\icons
+H:\Java_Learning\Section_20\public\assets\icons\index.txt
+H:\Java_Learning\Section_20\public\assets\icons\indexCopy.txt
+H:\Java_Learning\Section_20\public\assets\index.txt
+H:\Java_Learning\Section_20\public\assets\indexCopy.txt
+H:\Java_Learning\Section_20\public\index.txt
+H:\Java_Learning\Section_20\public\indexCopy.txt
+Generated: 2025-11-11T18:07:50.864843500
