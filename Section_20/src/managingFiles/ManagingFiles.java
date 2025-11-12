@@ -43,7 +43,7 @@ public class ManagingFiles {
 
 //        try(BufferedReader reader = new BufferedReader(
 //                new FileReader("files//students.json"));
-//        PrintWriter writer = new PrintWriter("students-backup.json")){
+//        PrintWriter writer = new PrintWriter("students.json")){
 //
 //            reader.transferTo(writer);
 //

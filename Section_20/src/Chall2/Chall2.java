@@ -1,10 +1,7 @@
 package Chall2;
 
-import fileListing.FileListingMain;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
